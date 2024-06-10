@@ -1,5 +1,6 @@
 package com.example.blog_app_apis.controllers;
 
+import com.example.blog_app_apis.config.AppConstant;
 import com.example.blog_app_apis.entity.Post;
 import com.example.blog_app_apis.payloads.ApiResponse;
 import com.example.blog_app_apis.payloads.PostDto;
@@ -41,9 +42,9 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    ResponseEntity<PostResponse> getAllPost(@RequestParam(name = "pageNo",defaultValue = "0",required = false) Integer pageNo,
-                                            @RequestParam(name = "pageSize",defaultValue = "5",required = false)Integer pageSize,
-                                            @RequestParam(name = "sortBy",defaultValue = "postId",required = false)String sortBy){
+    ResponseEntity<PostResponse> getAllPost(@RequestParam(name = "pageNo",defaultValue = AppConstant.PAGE_NO,required = false) Integer pageNo,
+                                            @RequestParam(name = "pageSize",defaultValue = AppConstant.PAGE_SIZE,required = false)Integer pageSize,
+                                            @RequestParam(name = "sortBy",defaultValue = AppConstant.SORT_BY,required = false)String sortBy){
         PostResponse postResponse = postService.getAllPost(pageNo,pageSize,sortBy);
         return ResponseEntity.ok(postResponse);
     }
