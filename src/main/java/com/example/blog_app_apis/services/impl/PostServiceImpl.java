@@ -19,6 +19,7 @@ import org.springframework.data.domain.Page;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -112,6 +113,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<PostDto> searchPosts(String keyword) {
-        return null;
+        List<Post> postList = postRepo.findByTitleContaining(keyword);
+        List<PostDto> postDtoList = postList.stream().map((post)->modelMapper.map(post,PostDto.class)).collect(Collectors.toList());
+        return postDtoList;
     }
 }
